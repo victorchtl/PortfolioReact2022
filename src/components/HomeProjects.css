@@ -1,0 +1,9 @@
+.projectImg {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.projectImg:hover {
+    filter: brightness(40%);
+    transition: all .2s ease-in-out;
+}

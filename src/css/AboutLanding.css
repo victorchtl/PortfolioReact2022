@@ -1,0 +1,9 @@
+.orangeLink {
+    cursor: pointer;
+    transition: all .2s ease-in-out
+}
+
+.orangeLink:hover {
+    color: #f06c35;
+    transition: all .2s ease-in-out
+}
