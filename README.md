@@ -106,49 +106,7 @@ export const { setLightMode } = lightModeSlice.actions;
 export default lightModeSlice.reducer;
 ```
 
-### Skeleton Display While Data Loading
-#### (using ReactQuery and Material UI skeletons)
-
-```js
-import { Box, Container } from '@mui/material'
-import { useQuery } from '@tanstack/react-query'
-import React from 'react'
-import Carousel from '../components/shared/Carousel'
-import LandingHome from '../components/home/LandingHome'
-import LandingCarousel from '../components/shared/LandingTvAndMovies'
-import CarouselSkeleton from '../components/skeletons/CarouselSkeleton'
-import LandingCarouselSkeleton from '../components/skeletons/LandingCarouselSkeleton'
-import LandingHomeSkeleton from '../components/skeletons/LandingHomeSkeleton'
-import tmdbService from '../services/tmdb.service'
-
-function Home() {
-    const {
-        isLoading: isLoadingPopMovie,
-        isError: isErrorPopMovie,
-        error: errorPopMovie,
-        data: dataPopMovie
-        } = useQuery(['popularMovies'], () => tmdbService.getPopularMovies());
-    const {
-        isLoading: isLoadingNowMovie,
-        isError: isErrorNowMovie,
-        error: errorNowMovie,
-        data: dataNowMovie
-        } = useQuery(['nowPlayingMovies'], () => tmdbService.getNowPlayingMovies());
-    return (
-        <Container maxWidth={false}>
-            {isLoadingPopTv && <LandingHomeSkeleton />}
-            {dataPopTv && <LandingHome type={'tv'} title={'Popular Tv Shows'} data={dataPopTv.data.results} />}
-            {isLoadingPopMovie && <CarouselSkeleton />}
-            {dataPopMovie && <Carousel type={'movie'} title={'Popular Movies'} data={dataPopMovie.data.results} />}
-        </Container>
-    )
-}
-
-export default Home
-```
-
 ### Vertical Scroll Snap
-
 
 src/pages/Home.js
 ```js
@@ -181,6 +139,51 @@ html {scroll-snap-type: y mandatory}
 section {
     scroll-snap-align: end;
 }
+```
+
+### Portfolio Tabs Navigation
+
+```js
+import { Container, Tab, Tabs } from '@mui/material';
+import React from 'react';
+import { useQuery } from 'react-query';
+import PortfolioService from '../services/portfolio.service';
+
+function Portfolio() {
+
+  const {
+    isLoading: isLoadingP,
+    data: dataP
+    } = useQuery(['projects', portfolioCategory], () => PortfolioService.getAll(portfolioCategory))
+
+  return (
+    <Container maxWidth='lg'>
+      <Tabs
+        value={tabNumber}
+        onChange={handleChange}
+        scrollButtons
+        sx={{
+            padding: '20px 0 20px 0',
+            position: 'sticky',
+            top: {
+                xs: '48px',
+                md: '64px'
+                },
+        marginBottom: '50px',
+        bgcolor: 'background.default',
+        zIndex: 999
+        }}
+        variant="scrollable"
+        allowScrollButtonsMobile>
+        {dataTabs && dataTabs.map(e => (
+          <Tab label={e.name} key={e.name}/>
+        ))}
+      </Tabs>
+    </Container >
+  )
+}
+
+export default Portfolio
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
