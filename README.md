@@ -317,6 +317,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Victor Chatel - victor.chatel@gmail.com
 
-Project Link: [github.com/victorchtl/netflix-clone](https://github.com/victorchtl/netflix-clone)
+Project Link: [github.com/victorchtl/PortfolioReact2022](https://github.com/victorchtl/PortfolioReact2022)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
